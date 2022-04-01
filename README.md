@@ -4,7 +4,7 @@ CWA is an anonymizer for the [CREMMAWIKI corpus](https://github.com/HTR-United/c
 
 ## Set up
 
-Create virtual environment and use PiPy to install the dependenciez (ex: `pip install -r requirements.txt`)
+Create virtual environment and use PiPy to install the dependencies (ex: `pip install -r requirements.txt`)
 
 ## Run
 
