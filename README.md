@@ -4,15 +4,15 @@ CWA is an anonymizer for the [CREMMAWIKI corpus](https://github.com/HTR-United/c
 
 ## Set up
 
-Create virtual environment and use PiPy to install the dependencies (ex: `pip install -r requirements.txt`)
+Create a virtual environment and use PiPy to install the dependencies (ex: `pip install -r requirements.txt`)
 
 ## Run
 
-`run.py` show you an example of how to use the CWA module. 
+`run.py` shows an example of how to use the CWA module. 
 
-You can clone this repository, change the images in data to place yours, setup an environment and execute `run.py`.
+You can clone this repository, replace the images in data with yours, set up an environment and execute `run.py`.
 
-If you want to change the path the source image, you can also change the value of `path_to_data` in `run.py`.
+If you want to change the path the source images, you can also change the value of `path_to_data` in `run.py`.
 
 The new images will be created within the source folder. They will be named such as `my_source_img.png` becomes `my_source_img.out.png` which means that CWA will not overwrite your original images. 
 
