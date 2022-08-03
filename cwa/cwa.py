@@ -4,7 +4,8 @@ import cv2 as cv
 
 import os 
 
-class CremmaWikiAnonymizer:
+
+class CremmawikiImageAnonymizer:
     def anonymize(self):
         """Will draw a dark rectangle on the top of the image and return the image as an cv.im object"""
         height, width = self.img.shape[:2]
