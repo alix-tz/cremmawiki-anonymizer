@@ -9,7 +9,7 @@ import pandas as pd
 
 
 class CremmawikiImageAnonymizer:
-    def anonymize(self):
+    def anonymize(self) -> cv.imread:
         """Will draw a dark rectangle on the top of the image and return the image as an cv.im object"""
         height, width = self.img.shape[:2]
         img_with_rect = cv.rectangle(img=self.img, 
@@ -30,16 +30,18 @@ class CremmawikiImageAnonymizer:
         """Will draw a dark rectangle on the top of the image and save it in a new file"""
         cv.imwrite(self.path_out, self.anonymize())
 
-    def _make_path_out(self):
+    def _make_path_out(self) -> str:
+        """Build path for output."""
         bits = os.path.basename(self.path_in).split(".")
         bits.insert(-1, "out")
         filename = ".".join(bits)
         return os.path.join(os.path.dirname(self.path_in), filename)
 
-    def _load_image(self):
+    def _load_image(self) -> cv.imread:
+        """Load an image with CV."""
         return cv.imread(self.path_in)
 
-    def __init__(self, path_in):
+    def __init__(self, path_in: str):
         self.path_in = path_in
         self.path_out = self._make_path_out()
         self.img = self._load_image()
@@ -76,6 +78,7 @@ class MetadataInSafeExposure: #MI6()
         self._save_conv_table(conv_table=name_table)
 
     def update_conv_table(self, names:list):
+        """Update the conversion table giving new ids to new names."""
         name_table = self._load_conv_table()
         # if there are names not already included in the conversion table, proceed
         new_names = set(names).difference([name for name in name_table.keys()])
@@ -90,6 +93,7 @@ class MetadataInSafeExposure: #MI6()
             print("The new names provided are already in the conversion table.")
 
     def anonymize_metadata(self):
+        """Change values in column writer_name to anonymize them."""
         if not isinstance(self.metadata, type(pd.DataFrame())):
             print("Error. The metadata must take the form of a DataFrame.")
             return False
@@ -105,7 +109,8 @@ class MetadataInSafeExposure: #MI6()
             else:
                 self.metadata["writer_name"] = self.metadata["writer_name"].replace(conv_table.keys(), conv_table.values())
 
-    def is_anonymized(self):
+    def is_anonymized(self) -> bool:
+        """Control values in writer_name column to make sure there is no secret information left."""
         match = 0
         for elem in self.metadata["writer_name"]:
             if not elem.startswith("AW0"):
@@ -116,7 +121,7 @@ class MetadataInSafeExposure: #MI6()
             print(f"It looks like some cells ({match}) were not anonymized.")
             return False
 
-    def __init__(self, path_to_conversion_table, path_to_metadata) -> None:
+    def __init__(self, path_to_conversion_table: str, path_to_metadata: str):
         self.path_to_conv_table = path_to_conversion_table
         self.metadata = None
         if os.path.exists(path_to_metadata):

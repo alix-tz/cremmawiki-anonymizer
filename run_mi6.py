@@ -24,8 +24,11 @@ new_metadata = MI6(path_to_conversion_table, path_to_metadata)
 
 # create/update list of ids in conversion table and apply to the metadata
 # save the result in a new CSV file
+if new_metadata.metadata is not None:
+    names = new_metadata.metadata.get("writer_name", [])
+else:
+    names = []
 
-names = new_metadata.metadata.get("writer_name", [])
 if len(names) > 0:
     if not os.path.exists(path_to_conversion_table):
         new_metadata.generate_initial_conv_table(names)
