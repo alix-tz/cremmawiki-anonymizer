@@ -5,7 +5,7 @@ import sys
 
 from cwa.cwa import CremmawikiImageAnonymizer as CIA
 
-from CONST import IMG_EXT, EX_PATH_TO_DATA
+from CONST import EX_IMG_EXTENSIONS, EX_PATH_TO_DATA
 
 # indicate the correct path to your data!
 path_to_data = ""
@@ -16,7 +16,7 @@ if len(path_to_data) == 0:
 
 # load images and apply transformations
 for file in os.listdir(path_to_data):
-    if file.lower().split(".")[-1] in IMG_EXT:
+    if file.lower().split(".")[-1] in EX_IMG_EXTENSIONS:
         if not ".out" in file:
             image = CIA(os.path.join(path_to_data, file))
             if image.img is None:
